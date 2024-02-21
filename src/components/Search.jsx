@@ -9,7 +9,7 @@ const Search = () => {
 
     if (!searchTerm.trim()) return;
 
-    fetch(`http://www.omdbapi.com/?t=${searchTerm}&apikey=803c7771&`)
+    fetch(`https://www.omdbapi.com/?t=${searchTerm}&apikey=803c7771&`)
       .then((response) => response.json())
       .then((data) => setMovie(data))
       .catch((error) => {
