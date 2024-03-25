@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import useFetch from "../hooks/useFetch";
 
 const Search = () => {
   const [movie, setMovie] = useState(null);
