@@ -1,22 +1,27 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
-const useFetch = (event, searchTerm, setMovie) => {
-  event.preventDefault();
+const useFetch = () => {
+  const [movie, setMovie] = useState(null);
+  const { moviename } = useParams();
+  const navigate = useNavigate();
 
-  // if (!searchTerm.trim()) return;
-  console.log("hook works");
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        `https://www.omdbapi.com/?t=${searchTerm}&apikey=803c7771&`
+        `https://www.omdbapi.com/?t=${moviename}&apikey=803c7771&`
       );
       const data = await response.json();
       setMovie(data);
       console.log(data);
     };
     fetchData();
-  }, []);
-  return <div>useFetch</div>;
+  }, [moviename]);
+
+  if (movie?.Error) {
+    navigate("/404");
+  }
+  return movie;
 };
 
 export default useFetch;
